@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <legend class="border-bottom mb-4">
+                    Upload Files for
+                </legend>
+                <h5>
+                    {{ equipment.equipment_name }}
+                    {{ equipment.equipment_sn }}
+                </h5>
+                <p>Remember to choose the correct Folder.</p>
+                <h5>
+                    {{ form.file.label() }}
+                    {{ form.file(class="form-control-file") }}
+                </h5>     
+                <h5>
+                    {{ form.folder.label() }}
+                    {{ form.folder(class="form-control-file") }}
+                </h5>                          
+                <div class="form-group">
+                    <div class="row mt-2">
+                        <div class="col">
+                            {{ form.submit(class="btn btn-outline-info btn-block") }}
+                        </div>
+                        <div class="col">
+                            <a class="btn btn-outline-info btn-block" href="{{url_for('main.edit_equipment', equipment_id = equipment.equipment_id)}}">Done</a>
+                        </div>
+                      </div>
+                </div>
+            </form>
+        </div>
+        <p id="save-message"></p>
+</div>
+{% endblock content %}

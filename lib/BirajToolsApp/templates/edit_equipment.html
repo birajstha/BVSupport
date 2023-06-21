@@ -1,0 +1,108 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+  <div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+      <form method="POST" action="" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            <legend class="border-bottom mb-4">
+              {{ related_entity_no }}
+                <h6>
+                  Test Documentation
+                  <br><br>
+                  Edit the details and press Add.
+                </h6>
+            </legend>
+            <div class="form-group">
+              <h6>
+                {{ form.hidden_tag() }}
+                <input type="hidden" name="related_entity" value="{{ related_entity_no }}">
+                  {{ form.equipment_name.label() }}
+                  {{ form.equipment_name(class="form-control-file") }}
+                  <br>
+                  {{ form.equipment_sn.label() }}
+                  {{ form.equipment_sn(class="form-control-file") }}
+              </h6>
+              {% if form.equipment_sn.errors %}
+                {% for error in form.equipment_sn.errors %}
+                  <span class="text-danger">{{ error }}</span><br>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </fieldset>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                {{ form.submit(class="btn btn-outline-success btn-block") }}
+              </div>
+            </div>
+            <div class="row mt-2">
+              <div class="col">
+                <a class="btn btn-outline-info btn-block" href="{{ url_for('CameraApp.take_photo', equipment_id=equipment_id) }}">Take Photo</a>
+              </div>
+              <div class="col">
+                <a class="btn btn-outline-info btn-block" href="{{ url_for('upload_files_app.upload_files', equipment_id=equipment_id) }}">Upload Files</a>
+              </div>
+            </div>
+          </div>
+          
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-12">
+        <div class="form-group">
+          <div class="row">
+            <h6 class="col-lg-4 col-md-4 col-sm-12">
+              {{ form.hidden_tag() }}
+              <input type="hidden" name="related_entity" value="{{ related_entity_no }}">
+              {{ form.tested_good_bad.label() }}
+              <br>
+              {% for value, label in form.tested_good_bad.choices %}
+                <label>
+                  <input type="radio" name="{{ form.tested_good_bad.name }}" value="{{ value }}" {% if value == form.tested_good_bad.data %}checked{% endif %}>
+                  {{ label }}
+                </label>
+                <br>
+              {% endfor %}
+            </h6>
+            <div class="form-group col-lg-8 col-md-8 col-sm-12">
+              <h6>Pictures:</h6>
+                {% if pictures %}
+                  <div class="picture-container">
+                    {% for picture in pictures %}
+                      <div class="picture-item">
+                        <div class="picture-container">
+                          <img width="100px" src="{{ url_for('CameraApp.get_pictures', equipment_id=picture.equipment_id, picture_id=picture.picture_id) }}" alt="Picture" class="thumbnail-img">
+                        </div>                        
+                        <button type="button" class="delete-btn btn btn-outline-danger" title="Delete" onclick="deletePicture('{{ url_for('CameraApp.delete_picture', picture_id=picture.picture_id) }}')">
+                          <i class="fas fa-times">&times;</i>
+                        </button>
+                        <script src="../static/deletePicture.js"></script>
+                      </div>
+                    {% endfor %}
+                  </div>
+                {% else %}
+                  <h6>No pictures uploaded yet</h6>
+                {% endif %}
+            </div>
+          </div>
+            <h6>
+              {{ form.remarks.label() }}
+              {{ form.remarks(class="form-control") }}
+            </h6>
+            {% if form.equipment_sn.errors %}
+              {% for error in form.equipment_sn.errors %}
+                <span class="text-danger">{{ error }}</span><br>
+              {% endfor %}
+            {% endif %}
+        </div>
+        <input type="hidden" id="timerValue" name="timerValue" value="">
+        <span id="timer">00:00:00</span>
+        <p>Time Spent = {{ equipment.time_qthr }} QTHR</p>
+      </div>
+    </form>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='timer.js') }}"></script>
+{% endblock content %}
+

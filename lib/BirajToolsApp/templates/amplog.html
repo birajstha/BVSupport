@@ -1,0 +1,42 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<div class="content-section">
+    {% if not filename %}
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <form method="POST" action="" enctype="multipart/form-data">
+                <legend class="border-bottom mb-4">
+                    Plot the battery charge cycle here.
+                </legend>
+                <p>Remember to choose the correct amplifier for the log file uploaded as different amplifier has a different cutoff.</p>
+                <h5>
+                    {{ form.log_file.label() }}
+                    {{ form.log_file(class="form-control-file") }}
+                </h5>     
+                <h5>
+                    {{ form.amplifier.label() }}
+                    {{ form.amplifier(class="form-control-file") }}
+                </h5>                          
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <h6>Example: </h6>
+            <img class="responsive" src="{{ url_for('static', filename='BrainAmpFamily.png') }}" alt="display-demo" >
+        </div>
+    </div>
+    
+    {% else %}
+        <legend class="border-bottom mb-4">
+            <h4> Selected Amplifier: {{amplifier}}</h4>
+        </legend>
+        <p>Plotted from the uploaded amp log data.</p>
+        <img class="responsive" src="{{ url_for('static', filename='plots/' + filename +'.svg') }}">
+        <a class="btn btn-outline-info" href="{{ url_for('amplogapp.amplog') }}">Back</a>
+    {% endif %}
+    
+</div>
+{% endblock content %}

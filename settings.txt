@@ -1,0 +1,11 @@
+
+# Test Person #
+tested_by= BV Support
+
+# Where the end folder to be placed #
+test_folder_path= C:\Users\BShrestha\DropZone\Biraj\TestFiles
+
+dropzone_support_folder_path= C:\Users\BShrestha\DropZone\L_SupportData
+
+# Copies contents of this path into the LogFiles folder in the test_folder_path
+recorder_log_path= ./log
