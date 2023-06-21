@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="content-section">
+    <div class="col-lg-4 col-md-4 col-sm-12"></div>
+    <div class="video-container">
+        <p type="hidden" id="equipment_id" value="{{equipment_id}}"></p>
+        <p type="hidden" id="equipment_name" value="{{equipment_name}}"></p>
+        <h6 id="equipment_sn" value="{{equipment_sn}}">Take Pictures for 
+            <h5>
+                {{ equipment_name }}
+                {{ equipment_sn }}
+            </h5>
+        </h6>
+        <div>
+            <label for="camera-select">Select Camera:</label>
+            <select id="camera-select" class="camera-label"></select>
+            <label></label>
+        </div>
+        <a class="btn btn-outline-info" id="snap">Snap</a>
+        <a class="btn btn-outline-info" href="{{url_for('main.edit_equipment', equipment_id = equipment_id)}}">Done</a>
+        <p id="save-message"></p>
+        <video id="video" width="500px" height="281px" autoplay></video>
+    </div>
+    <script src="../static/camera_app.js"></script>
+
+</div>
+{% endblock content %}

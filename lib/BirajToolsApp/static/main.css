@@ -1,0 +1,291 @@
+body {
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+    background: #fafafa;
+    color: #333333;
+    margin-top: 5rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: #444444;
+  }
+  
+  .bg-steel {
+    background-color: #215363;
+  }
+  
+  .site-header .navbar-nav .nav-link {
+    color: #cbd5db;
+  }
+  
+  .site-header .navbar-nav .nav-link:hover {
+    color: #ffffff;
+  }
+  
+  .site-header .navbar-nav .nav-link.active {
+    font-weight: 500;
+  }
+  
+  .content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  
+  .article-title {
+    color: #444444;
+  }
+  
+  a.article-title:hover {
+    color: #428bca;
+    text-decoration: none;
+  }
+  
+  .article-content {
+    white-space: pre-line;
+  }
+  
+  .article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 16px;
+  }
+  
+  .article-metadata {
+    padding-bottom: 1px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #e3e3e3
+  }
+  
+  .article-metadata a:hover {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .article-svg {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+  }
+  
+  .account-img {
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .account-heading {
+    font-size: 2.5rem;
+  }
+
+  .responsive {
+    width: 100%;
+    height: auto;
+  }
+
+.camera-label {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+input[type="radio"] + label {
+  padding-left: 0;
+  display: inline;
+}
+
+.video-container {
+  width: 95%;
+  height: auto;
+  min-width: 40%;
+  max-width: 95%;
+  min-height: 30%;
+  max-height: 70%;
+  overflow: hidden;
+}
+
+/* Responsive styles for small screens */
+@media (max-width: 767px) {
+  .video-container {
+    width: 90%;
+    min-width: 90%;
+    min-height: 25%;
+    max-height: 55%;
+  }
+}
+
+/* Responsive styles for medium screens */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .video-container {
+    width: 80%;
+    min-width: 60%;
+    min-height: 20%;
+    max-height: 60%;
+  }
+}
+
+/* Responsive styles for large screens */
+@media (min-width: 1024px) {
+  .video-container {
+    width: 70%;
+    min-width: 50%;
+    min-height: 15%;
+    max-height: 50%;
+  }
+}
+
+
+.picture-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.picture-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.picture-item {
+  position: relative;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.thumbnail-img {
+  width: 100px;
+  height: auto;
+}
+
+.delete-form {
+  display: inline-block;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  color: rgb(233, 98, 98);
+  border-radius: 50%;
+  width: 25px; /* Adjust the width as needed */
+  height: 25px; /* Adjust the height as needed */
+  padding: 0;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn i {
+  font-size: 15px;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+#preview_report {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#preview_report td, #preview_report th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+@media screen and (max-width: 767px) {
+  #preview_report td, #preview_report th {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+}
+
+#preview_report tr:nth-child(even){background-color: #f2f2f2;}
+
+#preview_report tr:hover {background-color: #ddd;}
+
+#preview_report th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  background-color: #04AA6D;
+  color: white;
+  font-weight: lighter;
+}
+
+#equipment_name_th, #equipment_name_td {
+  text-align: right;
+}
+
+#qthr_th, #qthr_td {
+  text-align: center;
+}
+
+#remarks_td {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu;
+}
+
+#related-entity-table th {
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+  background-color: #215363;
+  color: white;
+  font-weight: lighter;
+}
+
+#related-entity-table th , #related-entity-table td, #settings th , #settings td {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+#equipment-list-table th, #settings th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  background-color: #215363;
+  color: white;
+  font-weight: lighter;
+}
+
+#equipment-list-table th , #equipment-list-table td , #settings td{
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.btn-outline-info {
+   /* Replace with your desired color */
+  border-color: #215363; /* Replace with your desired color */
+  color: #215363; /* Replace with your desired text color */
+}
+.btn-outline-info:hover {
+  background-color: #215363; /* Replace with your desired hover color */
+  border-color: #215363; /* Replace with your desired hover color */
+  color: #fff; /* Replace with your desired hover text color */
+}
+
+    /* Default button styles */
+    .btn {
+      padding: 10px 16px;
+      font-size: 14px;
+  }
+
+  /* Media query for small screens */
+  @media screen and (max-width: 767px) {
+      .btn {
+          padding: 8px 10px;
+          font-size: 12px;
+      }
+  }

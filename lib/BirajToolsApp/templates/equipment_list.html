@@ -1,0 +1,122 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<div class="content-section">
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">
+                    {{related_entity_no}}
+                    <h6>
+                        Test Documentation
+                        </br>
+                        </br>
+                        Enter details of equipment below..
+                    </h6>
+                </legend>
+                <div class="form-group">
+                    <h6>
+                        {{ form.hidden_tag() }}
+                        <input type="hidden" name="related_entity" value="{{ related_entity_no }}">
+                        {{ form.equipment_name.label() }}
+                        {{ form.equipment_name(class="form-control-file") }}
+                        </br>
+                        {{ form.equipment_sn.label() }}
+                        {{ form.equipment_sn(class="form-control-file") }}
+    
+                    </h4>
+                    {% if form.equipment_sn.errors %}
+                    {% for error in form.equipment_sn.errors %}
+                    <span class="text-danger">{{ error }}</span></br>
+                    {% endfor %}
+                    {% endif %}
+    
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-success btn-block") }}
+            </div>
+        </form>
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-12">
+        <table id="equipment-list-table" class = "responsive table-bordered table-condensed">
+        <thead>
+            <tr>
+                <th>Equipment Name</th>
+                <th>Equipment SN</th>
+                <th>Tested</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if EquipmentList %}
+                {% for item in EquipmentList %}
+                    <tr>
+                        <td>{{ item.equipment_name }}</td>
+                        <td>{{ item.equipment_sn }}</td>
+                        <td>{{ item.tested_good_bad }}</td>
+                        <td class="text-center">
+                            {% if item.tested_good_bad == 'NOT TESTED' %}
+                                <a class="btn btn-outline-info btn-block" href="{{ url_for('main.edit_equipment', equipment_id=item.equipment_id) }}">Test</a>
+                            {% elif item.pictures_imagecountnumber == 0 %}
+                                <a class="btn btn-outline-info btn-block" href="{{ url_for('main.edit_equipment', equipment_id=item.equipment_id) }}">Add Photos</a>
+                            {% elif not item.remarks %}
+                                <a class="btn btn-outline-info btn-block" href="{{ url_for('main.edit_equipment', equipment_id=item.equipment_id) }}">Add Remarks</a>
+                            {% else %}
+                                <a class="btn btn-success btn-block" href="{{ url_for('main.edit_equipment', equipment_id=item.equipment_id) }}">Edit</a>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a class="btn btn-outline-danger" href="{{ url_for('main.delete_equipment', equipment_id=item.equipment_id) }}">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4">Equipment list is empty.</td>
+                </tr>
+            {% endif %}
+        </tbody>            
+    </table>
+    {% if EquipmentList %}
+    {% endif %}
+    <label></label>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="btn-group btn-group-justified" role="group">
+                <a class="btn btn-outline-info" href="{{ url_for('make_doc.view_doc', related_entity=related_entity_no)}}">Preview</a>
+                <a class="btn btn-outline-info" href="#" onclick="exportToODT('{{ related_entity_no }}')">Export</a>
+                <a class="btn btn-outline-info" href="{{ url_for('make_doc.publish', related_entity=related_entity_no)}}">Publish</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<script>
+    function exportToODT(relatedEntityNo) {
+        // Create a form element
+        var form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/convert_html_to_doc/' + relatedEntityNo;
+
+        // Add a CSRF token if required
+        var csrfToken = document.querySelector('meta[name=csrf-token]');
+        if (csrfToken) {
+            var csrfField = document.createElement('input');
+            csrfField.type = 'hidden';
+            csrfField.name = 'csrf_token';
+            csrfField.value = csrfToken.content;
+            form.appendChild(csrfField);
+        }
+
+        // Submit the form
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+{% endblock content %}

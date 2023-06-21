@@ -1,0 +1,47 @@
+{% extends "layout.html"%}
+
+{% block content %}
+<div class="content-section">
+        <div id="exportContent">
+            <h5>
+                Related Entity: {{ response['related_entity'] }}
+            </h5>
+            <label></label>
+            <div>
+                <h6>Tested By: {{ response['tested_by'] }}</h6>
+                <h6>Tested On: {{ response['date_uploaded'].date() }}</h6>
+                <div class="table-responsive">
+                    <label></label>
+                    <h5>Test Summary</h5>
+                        <table id="preview_report" style="overflow-x:auto;" class="table table-bordered table-condensed">
+                            <thead>
+                                <tr>
+                                    <th id="equipment_name_th">Equipment Name</th>
+                                    <th>Equipment SN</th>
+                                    <th>Tested Good/Bad</th>
+                                    <th>Remarks</th>
+                                    <th id="qthr_th">Time QTHR</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for equipment in response['equipments'] %}
+                                    <tr>
+                                        <td id="equipment_name_td">{{ equipment['equipment_name'] }}</td>
+                                        <td>{{ equipment['equipment_sn'] }}</td>
+                                        <td>{{ equipment['tested_good_bad'] }}</td>
+                                        <td id="remarks_td">{{ equipment['remarks'] }}</td>
+                                        <td id="qthr_td">{{ equipment['time_qthr'] }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+            <label></label>
+            <p> Pictures and files uploaded to link: <a href="{{ response['dropzone_link'] }}">here</a></p>
+        </div>
+    <br>
+    <a class="btn btn-outline-info" href="{{ url_for('main.make_equipment_list', related_entity=response['related_entity']) }}">Back</a>
+</div>
+
+{% endblock content %}
